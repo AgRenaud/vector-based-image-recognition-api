@@ -1,0 +1,68 @@
+debug: false
+log_level: INFO
+
+storage:
+  # Where to store all the data
+  storage_path: ./storage
+
+  # Write-ahead-log related configuration
+  wal:
+    # Size of a single WAL segment
+    wal_capacity_mb: 32
+
+    # Number of WAL segments to create ahead of actual data requirement
+    wal_segments_ahead: 0
+
+
+  performance:
+    # Number of parallel threads used for search operations. If 0 - auto selection.
+    max_search_threads: 0
+
+  optimizers:
+    # The minimal fraction of deleted vectors in a segment, required to perform segment optimization
+    deleted_threshold: 0.2
+
+    # The minimal number of vectors in a segment, required to perform segment optimization
+    vacuum_min_vector_number: 1000
+
+    # If the number of segments exceeds this value, the optimizer will merge the smallest segments.
+    max_segment_number: 5
+
+    # Maximum number of vectors to store in-memory per segment.
+    # Segments larger than this threshold will be stored as read-only memmaped file.
+    memmap_threshold: 50000
+
+    # Maximum number of vectors allowed for plain index.
+    # Default value based on https://github.com/google-research/google-research/blob/master/scann/docs/algorithms.md
+    indexing_threshold: 20000
+
+    # Starting from this amount of vectors per-segment the engine will start building index for payload.
+    payload_indexing_threshold: 10000
+
+    # Minimum interval between forced flushes.
+    flush_interval_sec: 10
+
+  # Default parameters of HNSW Index. Could be override for each collection individually
+  hnsw_index:
+    # Number of edges per node in the index graph. Larger the value - more accurate the search, more space required.
+    m: 16
+    # Number of neighbours to consider during the index building. Larger the value - more accurate the search, more time required to build index.
+    ef_construct: 100
+    # Minimal amount of points for additional payload-based indexing.
+    # If payload chunk is smaller than `full_scan_threshold` additional indexing won't be used -
+    # in this case full-scan search should be preferred by query planner and additional indexing is not required.
+    full_scan_threshold: 10000
+
+service:
+
+  # Maximum size of POST data in a single request in megabytes
+  max_request_size_mb: 32
+
+  # Host to bind the service on
+  host: 0.0.0.0
+
+  # HTTP port to bind the service on
+  port: 6333
+
+  # GRPC port to bind the service on
+  grpc_port: 6334
