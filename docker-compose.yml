@@ -6,7 +6,13 @@ services:
     ports:
       - 8000:8000
     command: ["uvicorn", "main:app", "--workers", "1", "--host", "0.0.0.0", "--port", "8000"]
-
+  tf-serving:
+    build:
+      context: ./docker/tensorflow-serving
+    environment:
+      - MODEL_NAME=my_production_model
+    volumes:
+      - ./models/my_production_model:/models/my_production_model/1/
   qdrant:
     build:
       context: ./docker/qdrant
