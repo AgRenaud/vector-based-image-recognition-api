@@ -6,3 +6,10 @@ The project intends to propose a simple solution to expose through an API a syst
 
 ## Getting Started
 You can start to explore the project by taking a look to the `notebooks/` folder where you'll find several `.ipynb` files containing all you need to train a model for OCR tasks. You'll also find an implementation of  `ArcFace` for `tensorflow`.
+
+```bash
+# Get API health
+curl -X GET http://localhost:8000/health
+
+
+## Qdrant

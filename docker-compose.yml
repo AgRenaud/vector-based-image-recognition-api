@@ -11,6 +11,9 @@ services:
       context: ./docker/tensorflow-serving
     environment:
       - MODEL_NAME=my_production_model
+    ports:
+      - "8500:8500"
+      - "8501:8501"
     volumes:
       - ./models/my_production_model:/models/my_production_model/1/
   qdrant:
