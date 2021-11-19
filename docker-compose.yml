@@ -3,9 +3,16 @@ version: "3"
 services:
   api:
     build: .
+    environment:
+      - TENSORFLOW_SERVING_URL="http://tf-serving:8501/"
+      - TENSORFLOW_SERVING_MODEL_NAME="my_production_model"
+      - TENSORFLOW_SERVING_MODEL_PATH="v1/models/"
     ports:
       - 8000:8000
-    command: ["uvicorn", "api:create_app", "--workers", "1", "--host", "0.0.0.0", "--port", "8000", "--factory"]
+    command: ["uvicorn", "app.api:create_app", "--workers", "1", "--host", "0.0.0.0", "--port", "8000", "--factory"]
+    depends_on:
+      - tf-serving
+      - qdrant
   tf-serving:
     build:
       context: ./docker/tensorflow-serving
@@ -14,6 +21,7 @@ services:
     ports:
       - "8500:8500"
       - "8501:8501"
+    # network_mode: "host"
     volumes:
       - ./models/my_production_model:/models/my_production_model/1/
   qdrant:

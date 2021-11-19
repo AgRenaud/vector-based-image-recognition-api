@@ -36,8 +36,9 @@ RUN poetry install --no-dev
 # `production` image used for runtime
 FROM python-base as production
 ENV FASTAPI_ENV=production
+ENV APP_PATH="/app"
+ENV CONFIG_PATH="$APP_PATH/default_config.yaml"
 COPY --from=builder-base $PYSETUP_PATH $PYSETUP_PATH
 COPY ./app /app/
-WORKDIR /app
-CMD ["uvicorn", "main:app"]
+CMD ["uvicorn", "app.api:create_app", "--host", "0.0.0.0", "--port", "8000", "--factory"]
 EXPOSE 8000

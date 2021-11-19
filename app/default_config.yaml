@@ -1,0 +1,9 @@
+logging:
+  config:
+    path: ${APP_PATH}/default_logging.ini
+
+tensorflow_serving:
+  url: ${TENSORFLOW_SERVING_URL}
+  model:
+    name: ${TENSORFLOW_SERVING_MODEL_NAME}
+    path: ${TENSORFLOW_SERVING_MODEL_PATH}

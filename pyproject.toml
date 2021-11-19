@@ -9,7 +9,9 @@ python = "3.8.10"
 fastapi = "^0.70.0"
 uvicorn = "^0.15.0"
 qdrant-client = "^0.4.1"
-PyYAML = "^6.0"
+requests = "^2.26.0"
+envyaml = "^1.9.210927"
+opencv-python = "^4.5.4"
 
 [tool.poetry.dev-dependencies]
 

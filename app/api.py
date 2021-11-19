@@ -2,8 +2,8 @@ import sys
 import logging
 from fastapi import FastAPI
 
-from config import get_app_config
-from routers import health
+from app.config import get_app_config
+from app.routers import health, service
 
 
 get_app_config()
@@ -14,5 +14,6 @@ def create_app():
     app = FastAPI()
 
     app.include_router(health.router, prefix='/health')
+    app.include_router(service.router, prefix='/service')
 
     return app
