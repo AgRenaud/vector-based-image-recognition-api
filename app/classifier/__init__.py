@@ -1,0 +1,1 @@
+from app.classifier.image_classifier import ImageClassifier
