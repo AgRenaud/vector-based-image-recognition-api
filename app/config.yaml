@@ -1,0 +1,9 @@
+logging:
+  config:
+    path: ./default_logging.ini
+
+tensorflow_serving:
+  url: http://localhost:8501/
+  model:
+    name: my_production_model
+    path: /v1/models/
