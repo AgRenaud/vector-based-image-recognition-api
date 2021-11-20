@@ -7,3 +7,7 @@ tensorflow_serving:
   model:
     name: ${TENSORFLOW_SERVING_MODEL_NAME}
     path: ${TENSORFLOW_SERVING_MODEL_PATH}
+
+qdrant:
+  url: ${QDRANT_URL}
+  collection_name: ${QDRANT_COLLECTION_NAME}
