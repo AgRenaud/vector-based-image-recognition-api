@@ -1,4 +1,4 @@
-# Optical Character Recognition
+# Vector Based Image recognition API
 
 <p align="middle">
   <img src="./docs/images/tf-logo.png" width="15%" />
@@ -8,10 +8,7 @@
   <img src="./docs/images/qdrant-logo.png" width="18%" />
 </p>
 
-Simple implementation of a `Keras` model for optical character recognition (OCR).
-
-The project intends to propose a simple solution to expose through an API a system for One-Shot learning in the field of image recognition (OCR).
-
+The project show a simple solution to expose through an API a system for image recognition using a features extractor (tensorflow neural network deployed with `tensorflow-serving`) and a vector similarity search engine `qdrant`.
 
 ## Getting Started
 You can start to explore the project by taking a look to the `notebooks/` folder where you'll find several `.ipynb` files containing all you need to train a model for OCR tasks. You'll also find an implementation of  `ArcFace` for `tensorflow`.
@@ -33,21 +30,37 @@ The scripts allows the following actions:
 
 ## Start the application
 
-### Run API with Docker
+### Run the application with Docker
 ```
 docker-compose up
 ```
-### Feed search engine
-Take a look at [Qdrant Documentation](https://qdrant.tech/documentation/) to understand how to create a `Collection` and feed it with `Point`.
 
-Then go in the `scripts/` and run `create_collection.sh`.
+The configuration file for the application are describe in `app/default_config.yaml`.
+
+
+### Feed search engine
+
+Go in the `scripts/` and run `create_collection.sh`.
 ```bash
 cd scripts
 
 ./create_collection.sh http://localhost:6333 <CollectionName> <Path2JsonPoints> <Distance> <VectorSize>
-
 ```
+You can take a look at [Qdrant Documentation](https://qdrant.tech/documentation/) to understand how to create a `Collection` and feed it with `Point`.
 
-### Make your first call
-
-## Train a model
+Before using the above, make sure that your folder `<Path2JsonPoints>` is composed of `.json` file with the following format :
+```json
+{
+  "id": 800,
+  "payload": {
+    "class": "f"
+  },
+  "vector": [
+    -0.010314688086509705,
+    -0.6674487590789795,
+    0.0650707483291626,
+    -2.838604211807251,
+    ...
+  ]
+}
+```
