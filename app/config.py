@@ -33,3 +33,7 @@ def get_app_config():
         set_env_var('TF_SERVING_URL', configuration['tensorflow_serving']['url'])
         set_env_var('TF_SERVING_MODEL_NAME', configuration['tensorflow_serving']['model']['name'])
         set_env_var('TF_SERVING_MODEL_PATH', configuration['tensorflow_serving']['model']['path'])
+
+        set_env_var('QDRANT_URL', configuration['qdrant']['url'])
+        set_env_var('QDRANT_PORT', configuration['qdrant']['port'])
+        set_env_var('QDRANT_COLLECTION_NAME', configuration['qdrant']['collection_name'])
