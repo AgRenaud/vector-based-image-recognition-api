@@ -1,1 +1,2 @@
 tensorflow~=2.5.0
+extra_keras_datasets

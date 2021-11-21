@@ -23,14 +23,13 @@ services:
     ports:
       - "8500:8500"
       - "8501:8501"
-    # network_mode: "host"
     volumes:
-      - ./data/models/my_production_model:/models/my_production_model/1/
+      - ./storage/models/my_production_model:/models/my_production_model/1/
   qdrant:
     build:
       context: ./docker/qdrant
     volumes:
-      - ./docker/qdrant/data:/qdrant/storage
+      - ./storage/qdrant/storage:/qdrant/storage
       - ./docker/qdrant/custom_config.yaml:/qdrant/config/production.yaml
     ports:
       - "6333:6333"
