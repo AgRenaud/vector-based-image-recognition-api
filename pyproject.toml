@@ -12,6 +12,7 @@ qdrant-client = "^0.4.1"
 requests = "^2.26.0"
 envyaml = "^1.9.210927"
 opencv-python = "^4.5.4"
+python-multipart = "^0.0.5"
 
 [tool.poetry.dev-dependencies]
 

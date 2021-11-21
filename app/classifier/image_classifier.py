@@ -1,6 +1,7 @@
 import logging
+import cv2
 
-from numpy import array
+from numpy import array, newaxis
 
 from app.gateway import TensorflowServingGateway
 from app.gateway import QdrantGateway
@@ -40,7 +41,12 @@ class ImageClassifier:
         return pred_class
 
     def __get_image_preprocessing(self, image:array):
-        return image
+        img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        if img.shape[:2]!=(28,28):
+            img = cv2.resize(img, (28, 28), interpolation = cv2.INTER_CUBIC)
+        img = img[:, :, newaxis].astype('float32') / 255
+
+        return img
 
     def __get_features(self, image: array):
         return self.features_extractor.predict(image)

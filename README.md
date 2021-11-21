@@ -59,8 +59,17 @@ Before using the above, make sure that your folder `<Path2JsonPoints>` is compos
     -0.010314688086509705,
     -0.6674487590789795,
     0.0650707483291626,
-    -2.838604211807251,
-    ...
+    -2.838604211807251
   ]
 }
 ```
+
+### Make your first call
+
+```bash
+curl \
+  -X POST 'http://localhost:8000/service/classifier/predict' \
+  --form 'image_file=@"<my-file-path>"'
+```
+
+You'll find a postman collection on `docs/postman` with usefull example of API call.
