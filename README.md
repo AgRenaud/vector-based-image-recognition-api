@@ -2,7 +2,7 @@
 
 <p align="middle">
   <img src="./docs/images/tf-logo.png" width="15%" />
-  <img src="./docs/images/poetry-logo.svg" width="7%" />
+  <img src="./docs/images/poetry-logo.svg" width="6%" />
   <img src="./docs/images/fastapi-logo.png" width="18%" />
   <img src="./docs/images/docker-logo.png" width="18%" />
   <img src="./docs/images/qdrant-logo.png" width="18%" />
@@ -11,7 +11,7 @@
 The project show a simple solution to expose through an API a system for image recognition using a features extractor (tensorflow neural network deployed with `tensorflow-serving`) and a vector similarity search engine `qdrant`.
 
 ## Getting Started
-You can start to explore the project by taking a look to the `notebooks/` folder where you'll find several `.ipynb` files containing all you need to train a model for OCR tasks. You'll also find an implementation of  `ArcFace` for `tensorflow`.
+You can start to explore the project by taking a look to the `notebooks/` folder where you'll find several `.ipynb` files containing all you need to train a model for image recognition tasks. You'll also find an implementation of  `ArcFace` for `tensorflow`.
 
 The project is divided into three main parts: services, scripts and notebooks.
 
