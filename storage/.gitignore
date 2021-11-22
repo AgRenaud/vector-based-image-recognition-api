@@ -2,3 +2,5 @@
 *
 # Except this file and folders
 !.gitignore
+!collections_resources
+!models
