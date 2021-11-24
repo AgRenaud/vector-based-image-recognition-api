@@ -73,6 +73,16 @@ curl \
 ```
 
 You'll find a postman collection on `docs/postman` with usefull example of API call.
+## Test
+You can run a test coverage with the following command :
+```bash
+poetry run test
+```
+To show the report of the coverage, run
+```bash
+poetry run report
+```
+You'll find the tests in `tests/`.
 
 ## Contributors
 <a href="https://github.com/AgRenaud/Vector-Based-Image-Recognition-API/graphs/contributors">
