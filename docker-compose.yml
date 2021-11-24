@@ -34,7 +34,7 @@ services:
       RUST_BACKTRACE: "1"
     volumes:
       - qdrant-data:/qdrant/storage
-      - ./qdrant/qdrant_config.yaml:/qdrant/config/production.yaml
+      - ./qdrant_config.yaml:/qdrant/config/production.yaml
     ports:
       - "6333:6333"
 
