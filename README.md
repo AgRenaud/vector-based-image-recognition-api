@@ -73,3 +73,10 @@ curl \
 ```
 
 You'll find a postman collection on `docs/postman` with usefull example of API call.
+
+## Contributors
+<a href="https://github.com/AgRenaud/Vector-Based-Image-Recognition-API/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=AgRenaud/Vector-Based-Image-Recognition-API" />
+</a>
+
+Made with [contrib rocks](https://contrib.rocks/).
