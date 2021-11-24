@@ -1,6 +1,7 @@
 import logging
 
 from os import environ
+from numpy import ndarray
 from urllib.parse import urljoin
 
 from app.classifier import ImageClassifier
@@ -17,7 +18,6 @@ class ClassifierService:
 
 
     def _init_feature_extractor(self) -> None:
-        self._logger.info('init featur extractor')
         tf_serving_url = environ['TF_SERVING_URL']
         tf_model_name = environ['TF_SERVING_MODEL_NAME']
         tf_path_name = environ['TF_SERVING_MODEL_PATH']
@@ -45,5 +45,6 @@ class ClassifierService:
             cls._instance._init_feature_extractor()
         return cls._instance
 
-    def predict(self, image):
+    def predict(self, image: ndarray):
+        if not isinstance(image, ndarray): raise Exception
         return self.classifier.predict(image)
