@@ -1,4 +1,7 @@
+import logging
+
 from os import environ
+from numpy import ndarray
 from urllib.parse import urljoin
 
 from app.classifier import ImageClassifier
@@ -9,8 +12,8 @@ class ClassifierService:
 
     """
 
+    _logger = logging.getLogger(__name__)
     _instance = None
-
     classifier = None
 
 
@@ -37,9 +40,11 @@ class ClassifierService:
 
     def __new__(cls, *args, **kwargs):
         if cls._instance is None:
+            cls._logger.info(f'Create {cls.__name__}')
             cls._instance = super().__new__(cls, *args, **kwargs)
             cls._instance._init_feature_extractor()
         return cls._instance
 
-    def predict(self, image):
+    def predict(self, image: ndarray):
+        if not isinstance(image, ndarray): raise Exception
         return self.classifier.predict(image)

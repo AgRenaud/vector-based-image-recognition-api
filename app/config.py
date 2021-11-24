@@ -14,8 +14,8 @@ def set_loggers(config_file):
 
 def set_env_var(name, new_value):
     if name not in environ:
-        environ[name] = new_value
         logger.info(f'set env variable {name}')
+        environ[name] = str(new_value)
 
 def get_app_config():
     # Load configuration file

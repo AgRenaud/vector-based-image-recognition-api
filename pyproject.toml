@@ -1,8 +1,11 @@
 [tool.poetry]
-name = "optical-character-recognition"
+name = "vector-based-image-recognition-api"
 version = "0.1.0"
 description = ""
 authors = ["AgRenaud <renaud.aguirrechambilla@gmail.com>"]
+packages = [
+  { include = "scripts.py" }
+]
 
 [tool.poetry.dependencies]
 python = "3.8.10"
@@ -15,7 +18,18 @@ opencv-python = "^4.5.4"
 python-multipart = "^0.0.5"
 
 [tool.poetry.dev-dependencies]
+coverage = {version = "^6.1.2", extras = ["toml"]}
+pylama = "^7.7.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+test = 'scripts:test'
+report = 'scripts:report'
+audit = 'scripts:audit'
+
+[tool.coverage.run]
+source=['app']
+omit=['*/__init__.py']
