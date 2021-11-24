@@ -21,7 +21,7 @@ services:
   tf-serving:
     image: tensorflow/serving:nightly
     environment:
-      - MODEL_NAME=my_production_model
+      MODEL_NAME: my_production_model
     ports:
       - "8500:8500"
       - "8501:8501"
