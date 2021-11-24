@@ -26,14 +26,14 @@ services:
       - "8500:8500"
       - "8501:8501"
     volumes:
-      - tf-data:/models/my_production_model/1/
+      - ./storage/models/my_production_model:/models/my_production_model/1/
 
   qdrant:
     image: generall/qdrant
     environment:
       RUST_BACKTRACE: "1"
     volumes:
-      - qdrant-data:/qdrant/storage
+      - ./storage/qdrant/storage:/qdrant/storage
       - ./qdrant_config.yaml:/qdrant/config/production.yaml
     ports:
       - "6333:6333"
