@@ -2,35 +2,42 @@ version: "3"
 
 services:
   api:
+    image: vbir-api:dev
     build: .
     environment:
-      - TENSORFLOW_SERVING_URL="http://tf-serving:8501/"
-      - TENSORFLOW_SERVING_MODEL_NAME="my_production_model"
-      - TENSORFLOW_SERVING_MODEL_PATH="v1/models/"
-      - QDRANT_SERVER_URL="qdrant"
-      - QDRANT_SERVER_PORT="6333"
-      - QDRANT_SERVER_COLLECTION_NAME="CharactersVectors"
+      TENSORFLOW_SERVING_URL: "http://tf-serving:8501/"
+      TENSORFLOW_SERVING_MODEL_NAME: "my_production_model"
+      TENSORFLOW_SERVING_MODEL_PATH: "v1/models/"
+      QDRANT_SERVER_URL: "qdrant"
+      QDRANT_SERVER_PORT: "6333"
+      QDRANT_SERVER_COLLECTION_NAME: "CharactersVectors"
     ports:
-      - 8000:8000
+      - "8000:8000"
     command: ["uvicorn", "app.api:create_app", "--workers", "1", "--host", "0.0.0.0", "--port", "8000", "--factory"]
     depends_on:
       - tf-serving
       - qdrant
+
   tf-serving:
-    build:
-      context: ./docker/tensorflow-serving
+    image: tensorflow/serving:nightly
     environment:
-      - MODEL_NAME=my_production_model
+      MODEL_NAME: my_production_model
     ports:
       - "8500:8500"
       - "8501:8501"
     volumes:
       - ./storage/models/my_production_model:/models/my_production_model/1/
+
   qdrant:
-    build:
-      context: ./docker/qdrant
+    image: generall/qdrant
+    environment:
+      RUST_BACKTRACE: "1"
     volumes:
       - ./storage/qdrant/storage:/qdrant/storage
-      - ./docker/qdrant/custom_config.yaml:/qdrant/config/production.yaml
+      - ./qdrant_config.yaml:/qdrant/config/production.yaml
     ports:
       - "6333:6333"
+
+volumes:
+  qdrant-data:
+  tf-data:
