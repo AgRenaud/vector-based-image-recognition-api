@@ -30,11 +30,12 @@ jobs:
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no-interaction --no-root
       - name: Install library
-        run: poetry install --no-interaction
-      - name: Run tests
         run: |
+          poetry install --no-interaction
           apt-get update
           apt-get install -y python3-opencv
+      - name: Run tests
+        run: |
           source .venv/bin/activate
           poetry run test
-          poetry run coverage
+          poetry run report
