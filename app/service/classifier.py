@@ -1,3 +1,5 @@
+import logging
+
 from os import environ
 from urllib.parse import urljoin
 
@@ -9,12 +11,13 @@ class ClassifierService:
 
     """
 
+    _logger = logging.getLogger(__name__)
     _instance = None
-
     classifier = None
 
 
     def _init_feature_extractor(self) -> None:
+        self._logger.info('init featur extractor')
         tf_serving_url = environ['TF_SERVING_URL']
         tf_model_name = environ['TF_SERVING_MODEL_NAME']
         tf_path_name = environ['TF_SERVING_MODEL_PATH']
@@ -37,6 +40,7 @@ class ClassifierService:
 
     def __new__(cls, *args, **kwargs):
         if cls._instance is None:
+            cls._logger.info(f'Create {cls.__name__}')
             cls._instance = super().__new__(cls, *args, **kwargs)
             cls._instance._init_feature_extractor()
         return cls._instance
