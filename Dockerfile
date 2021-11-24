@@ -21,10 +21,10 @@ RUN apt-get update && apt-get install -y python3-opencv
 # `builder-base` stage is used to build deps + create our virtual environment
 FROM python-base as builder-base
 
-RUN apt-get update \
-    && apt-get install --no-install-recommends -y \
-        curl \
-        build-essential
+RUN apt update && apt install --no-install-recommends -y \
+    curl \
+    build-essential
+
 # install poetry - respects $POETRY_VERSION & $POETRY_HOME
 RUN curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
 
@@ -33,7 +33,6 @@ WORKDIR $PYSETUP_PATH
 COPY poetry.lock pyproject.toml ./
 
 RUN poetry install --no-dev
-
 
 # `production` image used for runtime
 FROM python-base as production

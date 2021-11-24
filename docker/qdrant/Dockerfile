@@ -1,5 +1,0 @@
-FROM generall/qdrant
-ENV RUST_BACKTRACE=1
-
-
-EXPOSE 6333
