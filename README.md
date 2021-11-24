@@ -84,6 +84,11 @@ poetry run report
 ```
 You'll find the tests in `tests/`.
 
+## Workflows
+
+### Run test on PR
+From [install poetry action](https://github.com/marketplace/actions/install-poetry-action)
+
 ## Contributors
 <a href="https://github.com/AgRenaud/Vector-Based-Image-Recognition-API/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=AgRenaud/Vector-Based-Image-Recognition-API" />
