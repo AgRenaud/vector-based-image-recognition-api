@@ -39,30 +39,18 @@ The configuration file for the application are describe in `app/default_config.y
 
 
 ### Feed search engine
+Run jupyter and train a model with `notebooks/train_model.ipynb`. The notebook will train a model, save it in  `storage/models` and create points to feed the search engine and save them in `storage/collections_resources`.
 
-Go in the `scripts/` and run `create_collection.sh`.
+Then go in the `scripts/` and run `create_collection.sh`. (Make sure the apis are up `docker-compose up`)
 ```bash
 cd scripts
 
-./create_collection.sh http://localhost:6333 <CollectionName> <Path2JsonPoints> <Distance> <VectorSize>
+./create_collection.sh http://localhost:6333 CharactersVectors <path-to-project>/collections_resources Cosine 256
+
+# ./create_collection.sh <qdrant-url> <collection-name> <path-to-points-folder> <distance> <vector-size>
 ```
 You can take a look at [Qdrant Documentation](https://qdrant.tech/documentation/) to understand how to create a `Collection` and feed it with `Point`.
 
-Before using the above, make sure that your folder `<Path2JsonPoints>` is composed of `.json` file with the following format :
-```json
-{
-  "id": 800,
-  "payload": {
-    "class": "f"
-  },
-  "vector": [
-    -0.010314688086509705,
-    -0.6674487590789795,
-    0.0650707483291626,
-    -2.838604211807251
-  ]
-}
-```
 
 ### Make your first call
 
@@ -71,9 +59,18 @@ curl \
   -X POST 'http://localhost:8000/service/classifier/predict' \
   --form 'image_file=@"<my-file-path>"'
 ```
+## Use poetry
+### Installation
+Install Poetry using `curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -`
 
-You'll find a postman collection on `docs/postman` with usefull example of API call.
-## Test
+The project is running under `python 3.8.10`. Thus you need to link poetry to your interpreter to allow poetry to create a virtual environment.
+```
+poetry env use <path-to-python-3.8.10-interpreter>
+```
+
+Check [Poetry Documentation](https://python-poetry.org/docs/) for further informations about poetry's command.
+
+### Tests and linter
 You can run a test coverage with the following command :
 ```bash
 poetry run test
@@ -84,8 +81,12 @@ poetry run report
 ```
 You'll find the tests in `tests/`.
 
+To check if the code follow python dev recommendations you can audit the code with
+```bash
+poetry run audit
+cat .audit
+```
 ## Workflows
-
 ### Run test on PR
 From [install poetry action](https://github.com/marketplace/actions/install-poetry-action)
 
