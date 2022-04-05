@@ -10,10 +10,11 @@ get_app_config()
 
 logger = logging.getLogger(__name__)
 
+
 def create_app():
     app = FastAPI()
 
-    app.include_router(health.router, prefix='/health')
-    app.include_router(service.router, prefix='/service')
+    app.include_router(health.router, prefix="/health")
+    app.include_router(service.router, prefix="/service")
 
     return app

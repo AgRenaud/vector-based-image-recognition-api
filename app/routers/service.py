@@ -14,7 +14,7 @@ router = APIRouter()
 logger = logging.getLogger(__name__)
 
 
-@router.get('/classifier/predict')
+@router.get("/classifier/predict")
 async def predict_class(image_file: UploadFile = File(...)):
     img = await image_file.read()
     nparr = np.fromstring(img, np.uint8)

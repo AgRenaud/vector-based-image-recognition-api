@@ -20,21 +20,18 @@ class TensorflowServingGateway:
 
     _logger = logging.getLogger(__name__)
 
-    def __init__(self, tf_serving_model_url : str):
+    def __init__(self, tf_serving_model_url: str):
         self.tf_serving_model_url = tf_serving_model_url
 
     def predict(self, img: array):
-        headers = {
-            'Content-type': 'application/json'
-        }
+        headers = {"Content-type": "application/json"}
 
-        body = {
-            "signature_name": "serving_default",
-            "instances": [img.tolist()]
-        }
+        body = {"signature_name": "serving_default", "instances": [img.tolist()]}
 
         data = json.dumps(body)
-        req = requests.post(self.tf_serving_model_url + ':predict', data=data, headers=headers)
+        req = requests.post(
+            self.tf_serving_model_url + ":predict", data=data, headers=headers
+        )
         res = req.json()
 
         return res

@@ -6,7 +6,7 @@ from typing import List
 class Input(BaseModel):
     values: ndarray
 
-    @validator('values', pre=True)
+    @validator("values", pre=True)
     def parse_values(v):
         return array(v, dtype=float)
 

@@ -11,7 +11,7 @@ def report():
         ["python", "-m", "coverage", "report"]
     )
 
-def audit():
+def format():
     subprocess.run(
-        ["pylama", "--ignore", "E24,W504", "--skip", "*__init__.py", "--report", ".audit", "app"]
+        ["black", "app"]
     )
