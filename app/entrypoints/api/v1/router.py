@@ -15,5 +15,3 @@ async def predict_class(image_file: UploadFile = File(...)):
     img = await image_file.read()
 
     return handlers.get_img_class(img)
-
-
