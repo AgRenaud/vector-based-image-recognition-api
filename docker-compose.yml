@@ -12,7 +12,6 @@ services:
       QDRANT_SERVER_COLLECTION_NAME: "CharactersVectors"
     ports:
       - "8000:8000"
-    command: ["uvicorn", "app.api:create_app", "--workers", "1", "--host", "0.0.0.0", "--port", "8000", "--factory"]
     depends_on:
       - tf-serving
       - qdrant

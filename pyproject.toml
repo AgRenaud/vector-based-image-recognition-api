@@ -3,9 +3,7 @@ name = "vector-based-image-recognition-api"
 version = "0.1.0"
 description = ""
 authors = ["AgRenaud <renaud.aguirrechambilla@gmail.com>"]
-packages = [
-  { include = "scripts.py" }
-]
+
 
 [tool.poetry.dependencies]
 python = "^3.8.10"
@@ -21,15 +19,24 @@ opencv-python-headless = "^4.5.5"
 coverage = {version = "^6.1.2", extras = ["toml"]}
 jupyter = "^1.0.0"
 black = "^22.3.0"
+poethepoet = "^0.13.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.poetry.scripts]
-test = 'scripts:test'
-report = 'scripts:report'
-format = 'scripts:format'
+[tool.poe.tasks]
+
+  [tool.poe.tasks.format]
+  help = "Run black on the code base"
+  cmd  = "black app"
+
+  [tool.poe.tasks.test]
+  help = "Run test coverage on the code base and display the coverage's report"
+  cmd = """
+    python -m coverage run -m unittest discover
+    python -m coverage report
+  """
 
 [tool.coverage.run]
 source=['app']
