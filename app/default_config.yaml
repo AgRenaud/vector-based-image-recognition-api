@@ -11,4 +11,4 @@ tensorflow_serving:
 qdrant:
   url: ${QDRANT_SERVER_URL}
   port: ${QDRANT_SERVER_PORT}
-  collection_name: ${QDRANT_SERVER_COLLECTION_NAME}
+  collection_name: ${QDRANT_COLLECTION_NAME}
