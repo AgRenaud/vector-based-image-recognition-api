@@ -1,5 +1,4 @@
 # Vector Based Image recognition API
-[![test](https://github.com/AgRenaud/vector-based-image-recognition-api/actions/workflows/run-tests.yaml/badge.svg?branch=master)](https://github.com/AgRenaud/vector-based-image-recognition-api/actions/workflows/run-tests.yaml)
 <p align="middle">
   <img src="./docs/images/tf-logo.png" width="15%" />
   <img src="./docs/images/poetry-logo.svg" width="6%" />
