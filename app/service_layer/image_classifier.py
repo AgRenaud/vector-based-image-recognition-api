@@ -1,10 +1,9 @@
 import logging
 import cv2
 
-from numpy import array, newaxis
+import numpy as np
 
-from app.gateway import TensorflowServingGateway
-from app.gateway import QdrantGateway
+from app.adapters import api
 
 
 class ImageClassifier:
@@ -33,31 +32,31 @@ class ImageClassifier:
         qdrant_port: str,
         collection_name: str,
     ):
-        self.features_extractor = TensorflowServingGateway(tf_serving_model_url)
-        self.search_engine = QdrantGateway(
+        self.features_extractor = api.TensorflowServingGateway(tf_serving_model_url)
+        self.search_engine = api.QdrantGateway(
             qdrant_url=qdrant_url,
             qdrant_port=qdrant_port,
             collection_name=collection_name,
         )
 
-    def predict(self, image: array):
-        prep_img = self.__get_image_preprocessing(image)
-        features = self.__get_features(prep_img).get("predictions")[0]
-        pred_class = self.__get_class(features)
+    def predict(self, image: np.ndarray):
+        prep_img = self._get_image_preprocessing(image)
+        features = self._get_features(prep_img).get("predictions")[0]
+        pred_class = self._get_class(features)
         return pred_class
 
-    def __get_image_preprocessing(self, image: array):
+    def _get_image_preprocessing(self, image: np.ndarray):
         img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         if img.shape[:2] != (28, 28):
             img = cv2.resize(img, (28, 28), interpolation=cv2.INTER_CUBIC)
-        img = img[:, :, newaxis].astype("float32") / 255
+        img = img[:, :, np.newaxis].astype("float32") / 255
 
         return img
 
-    def __get_features(self, image: array):
+    def _get_features(self, image: np.ndarray):
         return self.features_extractor.predict(image)
 
-    def __get_class(self, features_vector: array):
+    def _get_class(self, features_vector: np.ndarray):
         search_result = self.search_engine.search(features_vector)
         best_match = sorted(search_result, key=lambda d: d["score"], reverse=True)[0]
         return best_match
