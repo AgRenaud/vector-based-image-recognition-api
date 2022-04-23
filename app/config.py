@@ -7,16 +7,10 @@ from typing import Tuple
 logger = logging.getLogger(__name__)
 
 
-def set_loggers(config_file) -> None:
-    log_file_path = config_file
+def set_loggers() -> None:
+    configuration = get_config()
+    log_file_path = configuration['logging']['config']['path']
     logging.config.fileConfig(log_file_path, disable_existing_loggers=True)
-    set_env_var("LOGGING_CONFIG_PATH", config_file)
-
-
-def set_env_var(name, new_value) -> None:
-    if name not in environ:
-        logger.info(f"set env variable {name}")
-        environ[name] = str(new_value)
 
 
 def get_config() -> EnvYAML:
