@@ -1,4 +1,6 @@
 import logging
+
+import logging.config
 from envyaml import EnvYAML
 
 from os import environ, path

@@ -38,7 +38,7 @@ build-backend = "poetry.core.masonry.api"
 
   [tool.poe.tasks.test]
   help = "Run test coverage on the code base and display the coverage's report"
-  cmd = """
+  shell = """
     python -m coverage run -m unittest discover
     python -m coverage report
   """

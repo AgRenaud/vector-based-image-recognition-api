@@ -1,0 +1,3 @@
+logging:
+  config:
+    path: ./tests/test_logging.ini
