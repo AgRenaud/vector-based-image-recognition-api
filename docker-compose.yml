@@ -4,9 +4,10 @@ services:
   api:
     build: .
     environment:
-      TENSORFLOW_SERVING_URL: "http://tf-serving:8501/"
+      TENSORFLOW_SERVING_URL: "http://tf-serving"
+      TENSORFLOW_SERVING_PORT: "8501"
       TENSORFLOW_SERVING_MODEL_NAME: "my_production_model"
-      TENSORFLOW_SERVING_MODEL_PATH: "v1/models/"
+      TENSORFLOW_SERVING_MODEL_PATH: "v1/models"
       QDRANT_URL: "qdrant"
       QDRANT_PORT: "6333"
       QDRANT_COLLECTION_NAME: "CharactersVectors"
@@ -17,7 +18,7 @@ services:
       - qdrant
 
   tf-serving:
-    image: tensorflow/serving:nightly
+    image: tensorflow/serving:2.8.0
     environment:
       MODEL_NAME: my_production_model
     ports:

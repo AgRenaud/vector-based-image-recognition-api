@@ -25,11 +25,12 @@ def get_config() -> EnvYAML:
 def get_tf_serving_credentials() -> str:
     configuration = get_config()
 
-    url = configuration["serving"]["url"]
-    port = configuration["serving"]["port"]
-    model_path = configuration["serving"]["model_path"]
+    url = configuration["tensorflow_serving"]["url"]
+    port = configuration["tensorflow_serving"]["port"]
+    model_path = configuration["tensorflow_serving"]["model"]["path"]
+    model_name = configuration["tensorflow_serving"]["model"]["name"]
 
-    return f"{url}:{port}/{model_path}"
+    return f"{url}:{port}/{model_path}/{model_name}"
 
 
 def get_qdrant_credentials() -> Tuple[str, str]:

@@ -4,6 +4,7 @@ logging:
 
 tensorflow_serving:
   url: ${TENSORFLOW_SERVING_URL}
+  port: ${TENSORFLOW_SERVING_PORT}
   model:
     name: ${TENSORFLOW_SERVING_MODEL_NAME}
     path: ${TENSORFLOW_SERVING_MODEL_PATH}

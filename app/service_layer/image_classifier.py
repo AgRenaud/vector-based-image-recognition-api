@@ -33,7 +33,8 @@ class ImageClassifier:
         return img
 
     def _get_features(self, image: np.ndarray):
-        return self.features_extractor.predict(image)
+        features = self.features_extractor.predict(image)
+        return features
 
     def _get_class(self, features_vector: np.ndarray):
         search_result = self.classifier.search(features_vector)
