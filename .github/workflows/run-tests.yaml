@@ -19,7 +19,7 @@ jobs:
       - name: Set up python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8.10
+          python-version: 3.9.10
       - name: Install Poetry
         uses: snok/install-poetry@v1
         with:
@@ -44,5 +44,4 @@ jobs:
       - name: Run tests
         run: |
           source .venv/bin/activate
-          poetry run test
-          poetry run report
+          poetry run poe test
