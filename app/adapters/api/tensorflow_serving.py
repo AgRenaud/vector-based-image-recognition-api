@@ -2,7 +2,7 @@ import json
 import requests
 import logging
 
-from numpy import array
+import numpy as np
 
 
 class TensorflowServingGateway:
@@ -23,12 +23,13 @@ class TensorflowServingGateway:
     def __init__(self, tf_serving_model_url: str):
         self.tf_serving_model_url = tf_serving_model_url
 
-    def predict(self, img: array):
+    def predict(self, img: np.ndarray):
         headers = {"Content-type": "application/json"}
 
         body = {"signature_name": "serving_default", "instances": [img.tolist()]}
 
         data = json.dumps(body)
+
         req = requests.post(
             self.tf_serving_model_url + ":predict", data=data, headers=headers
         )

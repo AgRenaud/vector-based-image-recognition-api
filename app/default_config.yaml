@@ -4,11 +4,12 @@ logging:
 
 tensorflow_serving:
   url: ${TENSORFLOW_SERVING_URL}
+  port: ${TENSORFLOW_SERVING_PORT}
   model:
     name: ${TENSORFLOW_SERVING_MODEL_NAME}
     path: ${TENSORFLOW_SERVING_MODEL_PATH}
 
 qdrant:
-  url: ${QDRANT_SERVER_URL}
-  port: ${QDRANT_SERVER_PORT}
-  collection_name: ${QDRANT_SERVER_COLLECTION_NAME}
+  url: ${QDRANT_URL}
+  port: ${QDRANT_PORT}
+  collection_name: ${QDRANT_COLLECTION_NAME}

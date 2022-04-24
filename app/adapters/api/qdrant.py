@@ -7,7 +7,6 @@ from qdrant_client import QdrantClient
 
 
 class QdrantGateway:
-    """ """
 
     _logger = logging.getLogger(__name__)
 

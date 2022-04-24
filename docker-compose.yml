@@ -4,21 +4,21 @@ services:
   api:
     build: .
     environment:
-      TENSORFLOW_SERVING_URL: "http://tf-serving:8501/"
+      TENSORFLOW_SERVING_URL: "http://tf-serving"
+      TENSORFLOW_SERVING_PORT: "8501"
       TENSORFLOW_SERVING_MODEL_NAME: "my_production_model"
-      TENSORFLOW_SERVING_MODEL_PATH: "v1/models/"
-      QDRANT_SERVER_URL: "qdrant"
-      QDRANT_SERVER_PORT: "6333"
-      QDRANT_SERVER_COLLECTION_NAME: "CharactersVectors"
+      TENSORFLOW_SERVING_MODEL_PATH: "v1/models"
+      QDRANT_URL: "qdrant"
+      QDRANT_PORT: "6333"
+      QDRANT_COLLECTION_NAME: "CharactersVectors"
     ports:
       - "8000:8000"
-    command: ["uvicorn", "app.api:create_app", "--workers", "1", "--host", "0.0.0.0", "--port", "8000", "--factory"]
     depends_on:
       - tf-serving
       - qdrant
 
   tf-serving:
-    image: tensorflow/serving:nightly
+    image: tensorflow/serving:2.8.0
     environment:
       MODEL_NAME: my_production_model
     ports:

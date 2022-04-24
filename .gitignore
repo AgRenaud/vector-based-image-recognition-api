@@ -6,3 +6,5 @@ __pycache__/
 .coverage
 .audit
 .venv
+storage/
+*.png

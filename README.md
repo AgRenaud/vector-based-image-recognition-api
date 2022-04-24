@@ -1,5 +1,4 @@
 # Vector Based Image recognition API
-[![test](https://github.com/AgRenaud/vector-based-image-recognition-api/actions/workflows/run-tests.yaml/badge.svg?branch=master)](https://github.com/AgRenaud/vector-based-image-recognition-api/actions/workflows/run-tests.yaml)
 <p align="middle">
   <img src="./docs/images/tf-logo.png" width="15%" />
   <img src="./docs/images/poetry-logo.svg" width="6%" />
@@ -46,8 +45,6 @@ Then go in the `scripts/` and run `create_collection.sh`. (Make sure the apis ar
 cd scripts
 
 ./create_collection.sh http://localhost:6333 CharactersVectors <path-to-project>/collections_resources Cosine 256
-
-# ./create_collection.sh <qdrant-url> <collection-name> <path-to-points-folder> <distance> <vector-size>
 ```
 You can take a look at [Qdrant Documentation](https://qdrant.tech/documentation/) to understand how to create a `Collection` and feed it with `Point`.
 
@@ -56,9 +53,12 @@ You can take a look at [Qdrant Documentation](https://qdrant.tech/documentation/
 
 ```bash
 curl \
-  -X POST 'http://localhost:8000/service/classifier/predict' \
+  -X POST 'http://localhost:8000/api/v1/classifier/predict' \
   --form 'image_file=@"<my-file-path>"'
 ```
+
+The file type must be `.png`.
+
 ## Use poetry
 ### Installation
 Install Poetry using `curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -`
@@ -73,19 +73,9 @@ Check [Poetry Documentation](https://python-poetry.org/docs/) for further inform
 ### Tests and linter
 You can run a test coverage with the following command :
 ```bash
-poetry run test
+poetry run poe test
 ```
-To show the report of the coverage, run
-```bash
-poetry run report
-```
-You'll find the tests in `tests/`.
 
-To check if the code follow python dev recommendations you can audit the code with
-```bash
-poetry run audit
-cat .audit
-```
 ## Workflows
 ### Run test on PR
 From [install poetry action](https://github.com/marketplace/actions/install-poetry-action)
