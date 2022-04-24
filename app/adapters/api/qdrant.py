@@ -19,8 +19,8 @@ class QdrantGateway:
         search_result = self._client.search(
             collection_name=self.collection,
             query_vector=query_vector,
-            query_filter=None, # Don't use any filters for now, search across all indexed points
-            append_payload=True, # Also return a stored payload for found points
+            query_filter=None,  # Don't use any filters for now, search across all indexed points
+            append_payload=True,  # Also return a stored payload for found points
             top=5,  # Return 5 closest points
         )
 

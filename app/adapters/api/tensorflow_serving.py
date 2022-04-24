@@ -29,7 +29,7 @@ class TensorflowServingGateway:
         body = {"signature_name": "serving_default", "instances": [img.tolist()]}
 
         data = json.dumps(body)
-        
+
         req = requests.post(
             self.tf_serving_model_url + ":predict", data=data, headers=headers
         )

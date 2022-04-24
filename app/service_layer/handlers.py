@@ -21,6 +21,6 @@ def get_img_class(img: np.ndarray):
     im = np.fromstring(img, np.uint8)
     im = cv2.imdecode(im, cv2.IMREAD_COLOR)
 
-    logger.info(f'received image of shape : {im.shape}')
+    logger.info(f"received image of shape : {im.shape}")
 
     return classifier.predict(im)

@@ -7,7 +7,7 @@ from app.entrypoints.api import v1
 
 
 def create_app():
-    
+
     config.set_loggers()
 
     logger = logging.getLogger(__name__)

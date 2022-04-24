@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 def set_loggers() -> None:
     configuration = get_config()
-    log_file_path = configuration['logging']['config']['path']
+    log_file_path = configuration["logging"]["config"]["path"]
     logging.config.fileConfig(log_file_path, disable_existing_loggers=True)
 
 
